@@ -41,11 +41,13 @@ if not vim.loop.fs_stat(lazypath) then
         {
             "nvim-neo-tree/neo-tree.nvim",
             branch = "v3.x",
+           -- modifiable = true,
             dependencies = {
                 "nvim-lua/plenary.nvim",
                 "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
                 "MunifTanjim/nui.nvim",
                 -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
+--                visible = true,
             },
             lazy = false, -- neo-tree will lazily load itself
             ---@module "neo-tree"
@@ -120,5 +122,21 @@ if not vim.loop.fs_stat(lazypath) then
             })
             end,
         },
-        --{}
+        {
+  "linux-cultist/venv-selector.nvim",
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
+    { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+  },
+  lazy = false,
+  branch = "regexp", -- This is the regexp branch, use this for the new version
+  keys = {
+    { "<leader>vs", "<cmd>VenvSelect<cr>" },
+  },
+  ---@type venv-selector.Config
+  opts = {
+    -- Your settings go here
+  },
+},
 })
