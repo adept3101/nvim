@@ -26,17 +26,33 @@ if not vim.loop.fs_stat(lazypath) then
     -- Настройка плагинов через Lazy.nvim
     require("lazy").setup({
         -- Цветовая схема
-        {
-            "catppuccin/nvim",
-            name = "catppuccin",
-            priority = 1000,
-            config = function()
-            vim.cmd.colorscheme("catppuccin-mocha")
-            end,
-        },
-
+        --{
+          --  "catppuccin/nvim",
+           -- name = "catppuccin",
+           -- priority = 1000,
+            --config = function()
+            --vim.cmd.colorscheme("catppuccin-mocha")
+            --end,
+        --},
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+	config = function()
+        vim.cmd.colorscheme("tokyonight-moon")
+        end,
+    },
+        
         -- Статусная строка
-        { "vim-airline/vim-airline" },
+        -- { "vim-airline/vim-airline" },
+
+        -- {"vim-airline/vim-airline-themes"},
+
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
 
         {
             "nvim-neo-tree/neo-tree.nvim",
@@ -44,17 +60,20 @@ if not vim.loop.fs_stat(lazypath) then
            -- modifiable = true,
             dependencies = {
                 "nvim-lua/plenary.nvim",
-                "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+                "nvim-tree/nvim-web-devicons",
                 "MunifTanjim/nui.nvim",
-                -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
---                visible = true,
-            },
-            lazy = false, -- neo-tree will lazily load itself
-            ---@module "neo-tree"
-            ---@type neotree.Config?
+                            },
+            lazy = false,
             opts = {
-                -- fill any relevant options here
-            },
+                window = {
+                    mappings = {
+                        ["h"] = "close_node",       -- Закрыть папку или подняться на уровень выше
+                        ["l"] = "open",             -- Открыть файл/папку
+                        ["v"] = "open_vsplit",      -- Вертикальный сплит (опционально)
+                        ["s"] = "open_split",       -- Горизонтальный сплит (опционально)
+                    },
+                },
+            }
         },
         
         { "ryanoasis/vim-devicons" },
@@ -98,11 +117,14 @@ if not vim.loop.fs_stat(lazypath) then
             event = 'VimEnter',
             dependencies = {{'nvim-tree/nvim-web-devicons'}}
         },
+
         {'lewis6991/gitsigns.nvim'},
+
         {
             "hrsh7th/vim-vsnip",
             event = "InsertEnter"
         },
+
         {
             "hrsh7th/cmp-vsnip",
             dependencies = { "hrsh7th/vim-vsnip" },
@@ -122,21 +144,22 @@ if not vim.loop.fs_stat(lazypath) then
             })
             end,
         },
+
         {
-  "linux-cultist/venv-selector.nvim",
-  dependencies = {
-    "neovim/nvim-lspconfig",
-    "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
-    { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
-  },
-  lazy = false,
-  branch = "regexp", -- This is the regexp branch, use this for the new version
-  keys = {
-    { "<leader>vs", "<cmd>VenvSelect<cr>" },
-  },
-  ---@type venv-selector.Config
-  opts = {
-    -- Your settings go here
-  },
-},
+            "linux-cultist/venv-selector.nvim",
+            dependencies = {
+                "neovim/nvim-lspconfig",
+                "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
+                { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+            },
+
+            lazy = false,
+            branch = "regexp",   
+            keys = {
+                { "<leader>vs", "<cmd>VenvSelect<cr>" },
+            },
+            opts = {},
+        },
+
+        {"rebelot/heirline.nvim"},
 })

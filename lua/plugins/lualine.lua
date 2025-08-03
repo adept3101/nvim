@@ -1,0 +1,18 @@
+-- require('lualine').setup {
+  -- options = {
+    -- theme = 'tokyonight',
+    -- icons_enabled = true,
+    -- disabled_filetypes = {
+      -- statusline = { 'neo-tree' },
+      -- winbar = {},
+    -- },
+  -- },
+  -- sections = {
+    -- lualine_a = { 'mode' },
+    -- lualine_b = { 'branch', 'diff', 'diagnostics' },
+    -- lualine_c = { { 'filename', path = 1 } },
+    -- lualine_x = { 'filetype', 'encoding' },
+    -- lualine_y = { 'progress' },
+    -- lualine_z = { 'location' },
+  -- },
+-- }
