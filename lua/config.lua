@@ -49,10 +49,10 @@ if not vim.loop.fs_stat(lazypath) then
 
         -- {"vim-airline/vim-airline-themes"},
 
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' }
-    },
+    -- {
+    --     'nvim-lualine/lualine.nvim',
+    --     dependencies = { 'nvim-tree/nvim-web-devicons' }
+    -- },
 
         {
             "nvim-neo-tree/neo-tree.nvim",
@@ -98,9 +98,9 @@ if not vim.loop.fs_stat(lazypath) then
         {
             "windwp/nvim-autopairs"
         },
-        {
-            "akinsho/bufferline.nvim"
-        },
+        -- {
+        --     "akinsho/bufferline.nvim"
+        -- },
 
         {
             "akinsho/toggleterm.nvim", version = "*", config = true
@@ -160,6 +160,8 @@ if not vim.loop.fs_stat(lazypath) then
             },
             opts = {},
         },
+
+        {"nvim-lua/plenary.nvim"},
 
      {
   "rebelot/heirline.nvim",
