@@ -161,5 +161,39 @@ if not vim.loop.fs_stat(lazypath) then
             opts = {},
         },
 
-        {"rebelot/heirline.nvim"},
+     {
+  "rebelot/heirline.nvim",
+  dependencies = {
+    "Zeioth/heirline-components.nvim",
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    local heirline_components = require("heirline-components.all")
+
+    require("heirline").setup({
+      statusline = {
+          condition = function()
+              return vim.bo.filetype ~= "neo-tree"
+          end,
+        heirline_components.component.mode(),
+        heirline_components.component.file_info(),
+        heirline_components.component.git_branch(),
+        heirline_components.component.diagnostics(),
+        heirline_components.component.fill(),
+        heirline_components.component.lsp(),
+        heirline_components.component.nav(),
+      },
+      opts = {
+        colors = heirline_components.hl.get_colors(),
+      },
+    })
+  end,
+},
+
+
+
+
+{"numToStr/Comment.nvim"},
+
+
 })
