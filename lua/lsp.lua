@@ -16,6 +16,7 @@ vim.lsp.enable({
   "rust-analyzer",
   "lua_ls",
   "pyright",
+  "gopls",
 })
 
 vim.diagnostic.config({ virtual_text = true })
