@@ -1,18 +1,27 @@
-return {
-  -- vim.lsp.config('rust-analyzer')
-  -- cmd = { 'rust-analyzer' },
-  -- filetypes = { 'rust' },
-  -- root_markers = { 'Cargo.toml' }
+-- return {
+--   cmd = { "rust-analyzer" },
+--   filetypes = { "rust" },
+--   root_markers = { "Cargo.toml", "rust-project.json" },
+--   settings = {
+--     ['rust-analyzer'] = {
+--       checkOnSave = {
+--         command = "clippy", -- или "check"
+--       },
+--     }
+--   }
+-- }
+-- vim.lsp.config['rust-analyzer'] = {
+--   cmd = { 'rust-analyzer' },
+--   filetypes = { 'rust' },
+--   root_markers = { 'Cargo.toml', 'rust-project.json' },
+--   settings = {
+--     ['rust-analyzer'] = {
+--       diagnostics = {
+--         enable = false,
+--       },
+--     }
+--   }
+-- }
 
-vim.lsp.config('rust_analyzer', {
-    settings = {
-      ['rust-analyzer'] = {
-        diagnostics = {
-          enable = false;
-        }
-      }
-    }
-  })
-
-
-}
+-- Возвращаем пустую таблицу или ничего, так как мы уже зарегистрировали конфигурацию
+-- return {}
