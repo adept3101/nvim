@@ -120,13 +120,9 @@ require("lazy").setup({
 {"windwp/nvim-autopairs"},
 {"akinsho/toggleterm.nvim", version = "*", config = true},
 {"windwp/nvim-ts-autotag"},
--- {'terrortylor/nvim-comment'},
 {'lewis6991/gitsigns.nvim'},
        
--- {
---   "hrsh7th/vim-vsnip",
---   event = "InsertEnter"  
--- },
+
 
 {
   "hrsh7th/cmp-vsnip",
@@ -176,48 +172,12 @@ require("lazy").setup({
   dependencies = { 'nvim-tree/nvim-web-devicons' }
 },
 
--- {
---   "rebelot/heirline.nvim",
---   dependencies = {
---     "Zeioth/heirline-components.nvim",
---     "nvim-tree/nvim-web-devicons",
---   },
---   config = function()
---     local heirline_components = require("heirline-components.all")
---
---     require("heirline").setup({
---       statusline = {
---           condition = function()
---               return vim.bo.filetype ~= "neo-tree"
---           end,
---         heirline_components.component.mode(),
---         heirline_components.component.file_info(),
---         heirline_components.component.git_branch(),
---         heirline_components.component.diagnostics(),
---         heirline_components.component.fill(),
---         heirline_components.component.lsp(),
---         heirline_components.component.nav(),
---       },
---       opts = {
---         colors = heirline_components.hl.get_colors(),
---       },
---     })
---   end,
--- },
 
 {"akinsho/bufferline.nvim", version="*",
 dependencies = { 'nvim-tree/nvim-web-devicons' }
 },
 
--- {
---     's1n7ax/nvim-window-picker',
---     name = 'window-picker',
---     event = 'VeryLazy',
---     version = '2.*',
---     config = function()
---         require'window-picker'.setup()
---     end,
--- },
+
 {
 "OXY2DEV/markview.nvim",
   lazy = false,
@@ -227,4 +187,31 @@ dependencies = { 'nvim-tree/nvim-web-devicons' }
             event = 'VimEnter',
             dependencies = {{'nvim-tree/nvim-web-devicons'}}
         },
+
+{
+  'saghen/blink.cmp',
+  dependencies = { 'rafamadriz/friendly-snippets' },
+
+  version = '1.*',
+
+  opts = {
+
+    keymap = { preset = 'default' },
+
+    appearance = {
+
+      nerd_font_variant = 'mono'
+    },
+
+    completion = { documentation = { auto_show = false } },
+
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
+
+    fuzzy = { implementation = "prefer_rust_with_warning" }
+  },
+  opts_extend = { "sources.default" }
+},
+
 })
