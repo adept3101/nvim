@@ -114,46 +114,75 @@ vim.pack.add({
 })
 
 require('blink.cmp').setup({
-      keymap = {
-        preset = 'default',
-        ["<C-space>"] = {},
-        ["<C-p>"] = {},
-        ["<Tab>"] = { "select_next", "fallback" },
-        ["<S-Tab>"] = {},
-        ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-n>"] = { "select_and_accept" },
-        ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-j>"] = { "select_next", "fallback" },
-        ["<C-b>"] = { "scroll_documentation_down", "fallback" },
-        ["<C-f>"] = { "scroll_documentation_up", "fallback" },
-        ["<C-l>"] = { "snippet_forward", "fallback" },
-        ["<C-h>"] = { "snippet_backward", "fallback" },
-        ["<CR>"] = { "accept", "fallback" },
-      },
+  keymap = {
+    preset = 'default',
+    ["<C-space>"] = {},
+    ["<C-p>"] = {},
+    ["<Tab>"] = { "select_next", "fallback" },
+    ["<S-Tab>"] = {},
+    ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
+    ["<C-n>"] = { "select_and_accept" },
+    ["<C-k>"] = { "select_prev", "fallback" },
+    ["<C-j>"] = { "select_next", "fallback" },
+    ["<C-b>"] = { "scroll_documentation_down", "fallback" },
+    ["<C-f>"] = { "scroll_documentation_up", "fallback" },
+    ["<C-l>"] = { "snippet_forward", "fallback" },
+    ["<C-h>"] = { "snippet_backward", "fallback" },
+    ["<CR>"] = { "accept", "fallback" },
+  },
 
-      appearance = {
-        nerd_font_variant = 'mono'
-      },
+  appearance = {
+    nerd_font_variant = 'mono'
+  },
 
-      completion = { documentation = { auto_show = false } },
+  completion = { documentation = { auto_show = false } },
 
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-      },
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
 
-    -- opts_extend = { "sources.default" }
-  })
+  -- opts_extend = { "sources.default" }
+})
+
+-- vim.pack.add({
+--   {
+--     src = "https://github.com/nvim-treesitter/nvim-treesitter",
+--     config = function()
+--       require('nvim-treesitter.configs').setup({
+--         ensure_installed = { "c", "lua", "python", "cpp", "query", "markdown", "markdown_inline", "javascript", "go" },
+--         highlight = { enable = true },
+--       })
+--     end,
+--   }
+-- })
 
 vim.pack.add({
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
-    config = function()
-      require('nvim-treesitter.configs').setup({
-        ensure_installed = { "c", "lua", "python", "cpp", "query", "markdown", "markdown_inline", "javascript" },
-        highlight = { enable = true },
-      })
-    end,
-  }
+  },
+})
+
+require("nvim-treesitter").setup({
+  ensure_installed = {
+    "c",
+    "lua",
+    "python",
+    "cpp",
+    "query",
+    "markdown",
+    "markdown_inline",
+    "javascript",
+    "go",
+    "gowork",
+    "gomod",
+  },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "c", "lua", "python", "cpp", "query", "markdown", "markdown_inline", "javascript", "go", "gomod", "gowork" },
+  callback = function(args)
+    vim.treesitter.start(args.buf)
+  end,
 })
 
 vim.pack.add({
@@ -172,6 +201,10 @@ vim.pack.add({
 vim.pack.add({
   { src = "https://github.com/akinsho/bufferline.nvim" },
 })
+
+-- vim.pack.add({
+--   { src = "https:/github.com/rebelot/terminal.nvim"},
+-- })
 
 vim.opt.termguicolors = true
 require("bufferline").setup({
@@ -205,4 +238,48 @@ require("bufferline").setup({
       style = "icon",
     },
   },
+})
+
+vim.pack.add({
+  { src = "https://github.com/linux-cultist/venv-selector.nvim" },
+})
+
+require("venv-selector").setup({
+  ft = "python",                              -- Load when opening Python files
+  -- keys = { { "<Leader>vs", "<cmd>VenvSelect<cr>" } }, -- Open picker on keymap
+  opts = {
+    options = {},                             -- plugin-wide options
+    search = {}                               -- custom search definitions
+  },
+})
+
+vim.pack.add({
+    { src = "https://github.com/ibhagwan/fzf-lua" },
+})
+
+local actions = require('fzf-lua.actions')
+require('fzf-lua').setup({
+    winopts = { backdrop = 85 },
+    -- keymap = {
+    --     builtin = {
+    --         ["<C-f>"] = "preview-page-down",
+    --         ["<C-b>"] = "preview-page-up",
+    --         ["<C-p>"] = "toggle-preview",
+    --     },
+    --     fzf = {
+    --         ["ctrl-a"] = "toggle-all",
+    --         ["ctrl-t"] = "first",
+    --         ["ctrl-g"] = "last",
+    --         ["ctrl-d"] = "half-page-down",
+    --         ["ctrl-u"] = "half-page-up",
+    --     }
+    -- },
+    -- actions = {
+    --     files = {
+    --         ["ctrl-q"] = actions.file_sel_to_qf,
+    --         ["ctrl-n"] = actions.toggle_ignore,
+    --         ["ctrl-h"] = actions.toggle_hidden,
+    --         ["enter"]  = actions.file_edit_or_qf,
+    --     }
+    -- }
 })
